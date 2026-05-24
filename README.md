@@ -138,7 +138,133 @@ docker compose up --build
 ```
 
 Open browser at [http://localhost:3000](http://localhost:3000)
+## 🌐 Deployment
 
+This project is ready to deploy to multiple platforms. See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for step-by-step instructions.
+
+### Quick Deployment Options:
+
+Vercel is the official Next.js hosting platform with zero-config deployment.
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel
+```
+
+Or connect your GitHub repo at [vercel.com](https://vercel.com) for automatic deployments.
+
+**Features:**
+- Zero-config Next.js deployment
+- Automatic preview URLs for PRs
+- Global CDN included
+- Free tier available
+
+### 2. **Netlify** (Free with Build Limits)
+
+```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Deploy
+netlify deploy --prod
+```
+
+Or connect your repo at [netlify.com](https://netlify.com) for continuous deployment.
+
+**Features:**
+- Free tier with 300 minutes/month builds
+- Automatic deployments from Git
+- Custom domain support
+
+### 3. **Docker + Any Cloud Provider**
+
+Using the included `Dockerfile` and `docker-compose.yml`:
+
+```bash
+# Build and push to Docker Hub
+docker build -t your-username/todo-app:latest .
+docker push your-username/todo-app:latest
+
+# Then deploy on:
+# - Railway.app
+# - Render.com
+# - AWS ECS
+# - DigitalOcean App Platform
+# - Google Cloud Run
+```
+
+**Railway.app** (Recommended for Docker):
+1. Go to [railway.app](https://railway.app)
+2. Connect your GitHub repo
+3. Set build command: `npm run build`
+4. Set start command: `npm start`
+5. Deploy!
+
+### 4. **GitHub Pages** (Static Export)
+
+For a static version (loses server-side benefits):
+
+```bash
+# Update next.config.js:
+# output: 'export'
+
+npm run build
+# Deploy the 'out' folder to GitHub Pages
+```
+
+### 5. **AWS** (Scalable)
+
+**Option A: Using AWS Amplify**
+```bash
+npm install -g @aws-amplify/cli
+amplify init
+amplify add hosting
+amplify publish
+```
+
+**Option B: Using AWS EC2 with Node.js**
+```bash
+# SSH into EC2 instance
+ssh -i key.pem ec2-user@your-instance-ip
+
+# Install Node.js and git
+sudo yum install nodejs git
+
+# Clone repo and deploy
+git clone your-repo
+cd todo-app
+npm install
+npm run build
+npm start
+```
+
+### 6. **Other Platforms**
+
+| Platform | Setup Time | Free Tier | Steps |
+|----------|-----------|-----------|-------|
+| **Render** | 2 min | ✅ Yes | Connect repo → Deploy |
+| **Fly.io** | 3 min | ✅ Limited | `flyctl launch` |
+| **Heroku** | 2 min | ❌ Paid only | `heroku create` |
+| **DigitalOcean** | 5 min | ✅ Limited | Container or App Platform |
+
+### Environment Variables
+
+For any deployment, set these if needed:
+
+```bash
+NODE_ENV=production
+# Add other vars from .env.example
+```
+
+### Monitoring & Logs
+
+After deployment:
+- **Vercel**: Check [vercel.com/dashboard](https://vercel.com/dashboard)
+- **Netlify**: Check [netlify.com/team/sites](https://app.netlify.com/team/sites)
+- **Docker/Cloud**: Use cloud provider's logging dashboard
 ## �📖 Usage
 
 ### Adding Tasks
