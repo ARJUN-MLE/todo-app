@@ -107,7 +107,39 @@ npm run build
 npm start
 ```
 
-## 📖 Usage
+## � Docker Setup
+
+### Build Docker image
+
+```bash
+docker build -t todo-app:latest .
+```
+
+### Run the container
+
+```bash
+docker run -it --rm -p 3000:3000 todo-app:latest
+```
+
+### Verify Node.js / npm inside container
+
+```bash
+docker run --rm node:24-slim node -v
+# expected: v24.16.0
+
+docker run --rm node:24-slim npm -v
+# expected: 11.13.0
+```
+
+### Using Docker Compose
+
+```bash
+docker compose up --build
+```
+
+Open browser at [http://localhost:3000](http://localhost:3000)
+
+## �📖 Usage
 
 ### Adding Tasks
 1. Type task description in the input field
